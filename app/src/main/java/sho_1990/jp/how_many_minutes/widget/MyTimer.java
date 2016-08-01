@@ -76,9 +76,9 @@ public class MyTimer {
                 @Override
                 public void run() {
                     count++;
-                    long mm = count*100 / 1000 / 60;
-                    long ss = count*100 / 1000 % 60;
-                    long ms = (count*100 - ss * 1000 - mm * 1000 * 60)/100;
+                    long mm = count * 100 / 1000 / 60;
+                    long ss = count * 100 / 1000 % 60;
+                    long ms = (count * 100 - ss * 1000 - mm * 1000 * 60)/100;
                     // 桁数を合わせるために02d(2桁)を設定
                     timeText.setText(String.format(Locale.JAPANESE, "%1$02d:%2$02d.%3$01d", mm, ss, ms));
                 }
