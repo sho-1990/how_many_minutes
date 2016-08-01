@@ -1,4 +1,4 @@
-package layout;
+package sho_1990.jp.how_many_minutes.fragment;
 
 import android.content.Context;
 import android.net.Uri;
