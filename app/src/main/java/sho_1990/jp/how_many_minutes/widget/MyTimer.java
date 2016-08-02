@@ -19,12 +19,15 @@ public class MyTimer {
 
     private TextView timeText;
     private Timer timer;
+    private Handler mHandler = new Handler();
 
     private MyTimer(TextView timeText) {
         this.timeText = timeText;
     }
 
     public static MyTimer newMyTimer(@NonNull TextView textView) {
+        // todo Stringリソースから持ってくる
+        textView.setText("00:00.0");
         return new MyTimer(textView);
     }
 
@@ -45,8 +48,6 @@ public class MyTimer {
         timer = new Timer();
         CountUpTimerTask timerTask = new CountUpTimerTask(0);
         timer.schedule(timerTask, delay, period);
-        // todo Stringリソースから持ってくる
-        timeText.setText("00:00.0");
 
         return this;
     }
@@ -71,7 +72,7 @@ public class MyTimer {
         }
         @Override
         public void run() {
-            new Handler().post(new Runnable() {
+            mHandler.post(new Runnable() {
 
                 @Override
                 public void run() {
@@ -83,7 +84,6 @@ public class MyTimer {
                     timeText.setText(String.format(Locale.JAPANESE, "%1$02d:%2$02d.%3$01d", mm, ss, ms));
                 }
             });
-
         }
     }
 }
