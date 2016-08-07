@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
 
         <RadioGroup
             android:id="@+id/sectionSelector"
@@ -12,6 +13,7 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/new_section"
                 android:id="@+id/selectNewSection"
                 android:layout_weight="1"/>
@@ -20,9 +22,9 @@
         <EditText
             android:id="@+id/textNewSection"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="section"
+            android:hint="@string/new_section_name"
             android:ems="10"
             android:layout_alignTop="@+id/sectionSelector"
             android:layout_toEndOf="@+id/sectionSelector"

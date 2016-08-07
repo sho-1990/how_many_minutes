@@ -22,8 +22,8 @@ public class SectionSelectorFragment extends DialogFragment {
 
     private SectionSelectorBinding mBinding;
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
+    // 時間
+    private static final String ARG_TIME = "time";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -32,12 +32,12 @@ public class SectionSelectorFragment extends DialogFragment {
     public SectionSelectorFragment() {
     }
 
-    // 使わない
+    // 使う
     @SuppressWarnings("unused")
-    public static SectionSelectorFragment newInstance(int columnCount) {
+    public static SectionSelectorFragment newInstance(@NonNull String time) {
         SectionSelectorFragment fragment = new SectionSelectorFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putString(ARG_TIME, time);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,8 +46,8 @@ public class SectionSelectorFragment extends DialogFragment {
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        Bundle args = new Bundle();
-        time = args.getString("TIME", "00:00.0");
+        final Bundle args = getArguments();
+        time = args.getString(ARG_TIME, getActivity().getString(R.string.init_time));
 
         // --- todo テーブルから区間名を引っ張ってくる
 
@@ -61,12 +61,15 @@ public class SectionSelectorFragment extends DialogFragment {
                 false
         );
 
-        builder.setPositiveButton("登録", new DialogInterface.OnClickListener() {
+        builder
+            .setTitle(time)
+            .setPositiveButton(getActivity().getString(R.string.register), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
-        });
+        })
+            .setView(mBinding.getRoot());
 
         return builder.create();
 

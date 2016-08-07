@@ -56,8 +56,8 @@ public class MyTimer {
         if (timer == null) {
             throw new IllegalAccessError("must before create");
         }
-        timer.cancel();
         CharSequence time = timeText.getText();
+        timer.cancel();
         timer = null;
         timeText.setText("00:00.0");
         return time;

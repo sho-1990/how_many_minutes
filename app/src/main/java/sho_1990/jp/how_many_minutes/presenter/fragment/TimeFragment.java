@@ -73,12 +73,9 @@ public class TimeFragment extends Fragment {
                 if (start) {
                     mMyTimer.start(0, 100);
                 } else {
-                    String time = (String) mMyTimer.stop();
-                    SectionSelectorFragment registerFragment = new SectionSelectorFragment();
-                    Bundle args = new Bundle();
-                    args.putString("TIME", time);
-                    registerFragment.setArguments(args);
-                    registerFragment.show(getFragmentManager(), time);
+                    final String time = (String) mMyTimer.stop();
+                    SectionSelectorFragment registerFragment = SectionSelectorFragment.newInstance(time);
+                    registerFragment.show(getFragmentManager(), null);
                 }
             }
         });
