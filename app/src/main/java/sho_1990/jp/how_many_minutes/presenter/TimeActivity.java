@@ -4,7 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 
-import sho_1990.jp.how_many_minutes.fragment.TimeFragment;
+import sho_1990.jp.how_many_minutes.presenter.fragment.TimeFragment;
 import sho_1990.jp.how_many_minutes.R;
 import sho_1990.jp.how_many_minutes.databinding.ActivityTimeBinding;
 

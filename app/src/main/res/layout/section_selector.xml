@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <RadioGroup
+            android:id="@+id/sectionSelector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:text="@string/new_section"
+                android:id="@+id/selectNewSection"
+                android:layout_weight="1"/>
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/textNewSection"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:inputType="text"
+            android:hint="section"
+            android:ems="10"
+            android:layout_alignTop="@+id/sectionSelector"
+            android:layout_toEndOf="@+id/sectionSelector"
+            />
+    </RelativeLayout>
+</layout>

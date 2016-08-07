@@ -6,7 +6,7 @@
         android:id="@+id/activity_time"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.TimeFragment">
+        tools:context=".presenter.fragment.TimeFragment">
 
         <ImageButton
             android:layout_width="240dp"

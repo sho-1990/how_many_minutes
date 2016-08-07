@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import sho_1990.jp.how_many_minutes.presenter.widget.MyTimer;
+
 /**
  * Created on 2016/08/01.
  */
