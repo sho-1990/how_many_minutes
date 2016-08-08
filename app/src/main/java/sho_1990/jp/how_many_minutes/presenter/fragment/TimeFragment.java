@@ -64,7 +64,7 @@ public class TimeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mBinding = FragmentTimeBinding.bind(getView());
-        mMyTimer = MyTimer.newMyTimer(mBinding.timeView);
+        mMyTimer = MyTimer.newMyTimer(getActivity(), mBinding.timeView);
         mBinding.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

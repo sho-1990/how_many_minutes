@@ -1,12 +1,14 @@
 package sho_1990.jp.how_many_minutes.presenter.widget;
 
-import android.os.Handler;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.widget.TextView;
 
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
+import sho_1990.jp.how_many_minutes.R;
+import sho_1990.jp.how_many_minutes.presenter.service.TimerService;
 
 /**
  *
@@ -15,20 +17,20 @@ import java.util.TimerTask;
  * Created on 2016/08/01.
  */
 
-public class MyTimer {
+public class MyTimer extends BroadcastReceiver {
 
+    private Context activity;
     private TextView timeText;
-    private Timer timer;
-    private Handler mHandler = new Handler();
 
-    private MyTimer(TextView timeText) {
+    private MyTimer(@NonNull Context activity, @NonNull TextView timeText) {
+        this.activity = activity;
         this.timeText = timeText;
     }
 
-    public static MyTimer newMyTimer(@NonNull TextView textView) {
+    public static MyTimer newMyTimer(@NonNull Context activity, @NonNull TextView textView) {
         // todo Stringリソースから持ってくる
-        textView.setText("00:00.0");
-        return new MyTimer(textView);
+        textView.setText(activity.getString(R.string.init_time));
+        return new MyTimer(activity, textView);
     }
 
     /**
@@ -45,45 +47,34 @@ public class MyTimer {
             throw new IllegalArgumentException("must delay > -1 , period > 0");
         }
 
-        timer = new Timer();
-        CountUpTimerTask timerTask = new CountUpTimerTask(0);
-        timer.schedule(timerTask, delay, period);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(TimerService.ACTION);
+        activity.registerReceiver(this, filter);
+
+        Intent i = new Intent(activity, TimerService.class);
+        i.putExtra("delay", delay);
+        i.putExtra("period", period);
+        activity.startService(i);
 
         return this;
     }
 
     public CharSequence stop() {
-        if (timer == null) {
-            throw new IllegalAccessError("must before create");
-        }
+
         CharSequence time = timeText.getText();
-        timer.cancel();
-        timer = null;
-        timeText.setText("00:00.0");
+        timeText.setText(activity.getString(R.string.init_time));
+
+        Intent i = new Intent(activity, TimerService.class);
+        activity.stopService(i);
+        activity.unregisterReceiver(this);
+
         return time;
     }
 
-    private class CountUpTimerTask extends TimerTask {
-
-        private int count;
-
-        private CountUpTimerTask(int count) {
-            this.count = count;
-        }
-        @Override
-        public void run() {
-            mHandler.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    count++;
-                    long mm = count * 100 / 1000 / 60;
-                    long ss = count * 100 / 1000 % 60;
-                    long ms = (count * 100 - ss * 1000 - mm * 1000 * 60)/100;
-                    // 桁数を合わせるために02d(2桁)を設定
-                    timeText.setText(String.format(Locale.JAPANESE, "%1$02d:%2$02d.%3$01d", mm, ss, ms));
-                }
-            });
-        }
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String time = intent.getStringExtra("time");
+        timeText.setText(time);
     }
+
 }
