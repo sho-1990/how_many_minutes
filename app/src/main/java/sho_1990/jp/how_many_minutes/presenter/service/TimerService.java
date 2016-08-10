@@ -2,8 +2,11 @@ package sho_1990.jp.how_many_minutes.presenter.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.Locale;
 import java.util.Timer;
@@ -19,6 +22,9 @@ public class TimerService extends Service {
     private int count;
     public static final String ACTION = "TimerService";
 
+
+
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -26,15 +32,17 @@ public class TimerService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(final Intent intent, int flags, int startId) {
 
         int delay = 0;
         int period = 100;
 
-        if (intent != null) {
-            delay = intent.getIntExtra("delay", 0);
-            period = intent.getIntExtra("period", 100);
-        }
+        final SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+
+        count = sharedPreferences.getInt("count", 0);
+
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
 
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -47,6 +55,11 @@ public class TimerService extends Service {
                 // 桁数を合わせるために02d(2桁)を設定
                 Intent i = new Intent(ACTION);
                 i.putExtra("time", String.format(Locale.JAPANESE, "%1$02d:%2$02d.%3$01d", mm, ss, ms));
+                Log.d("TimerService", i.getStringExtra("time"));
+
+                editor.putInt("count", count);
+                editor.apply();
+
                 sendBroadcast(i);
             }
         }, delay, period);
@@ -57,7 +70,10 @@ public class TimerService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+        }
         timer = null;
+        Log.d("SERVICE STOP", this.getClass().getName());
     }
 }

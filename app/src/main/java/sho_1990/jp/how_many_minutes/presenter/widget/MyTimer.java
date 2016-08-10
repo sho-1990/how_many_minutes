@@ -1,13 +1,16 @@
 package sho_1990.jp.how_many_minutes.presenter.widget;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
-import android.widget.TextView;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
-import sho_1990.jp.how_many_minutes.R;
+import java.util.List;
+
 import sho_1990.jp.how_many_minutes.presenter.service.TimerService;
 
 /**
@@ -19,62 +22,76 @@ import sho_1990.jp.how_many_minutes.presenter.service.TimerService;
 
 public class MyTimer extends BroadcastReceiver {
 
+    public interface MyTimerListener {
+        void onTextView(String time);
+    }
+
+
     private Context activity;
-    private TextView timeText;
+    private MyTimerListener listener;
 
-    private MyTimer(@NonNull Context activity, @NonNull TextView timeText) {
+    public String time;
+
+    private MyTimer(Context activity, MyTimerListener listener) {
         this.activity = activity;
-        this.timeText = timeText;
+        this.listener = listener;
     }
 
-    public static MyTimer newMyTimer(@NonNull Context activity, @NonNull TextView textView) {
-        // todo Stringリソースから持ってくる
-        textView.setText(activity.getString(R.string.init_time));
-        return new MyTimer(activity, textView);
+    public static MyTimer newMyTimer(@NonNull Context activity, @Nullable MyTimerListener listener) {
+        return new MyTimer(activity, listener);
     }
 
-    /**
-     * @param delay 開始
-     * @param period 終了
-     * @return 自分自身
-     * */
-    public MyTimer start(long delay, long period) {
-        if (delay > period) {
-            throw new IllegalArgumentException("must delay < period");
-        } else if (period < 0) {
-            throw new IllegalArgumentException("must period > 0");
-        } else if (delay < -1) {
-            throw new IllegalArgumentException("must delay > -1 , period > 0");
-        }
-
+    public MyTimer set() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(TimerService.ACTION);
         activity.registerReceiver(this, filter);
 
-        Intent i = new Intent(activity, TimerService.class);
-        i.putExtra("delay", delay);
-        i.putExtra("period", period);
-        activity.startService(i);
-
         return this;
+
     }
 
-    public CharSequence stop() {
+    /**
+     * @return 自分自身
+     * */
+    public String start() {
 
-        CharSequence time = timeText.getText();
-        timeText.setText(activity.getString(R.string.init_time));
+        if (!isServiceRunning(activity, TimerService.class)) {
+
+            Log.d("SERVICE STARTED", "TimerService");
+
+            Intent i = new Intent(activity, TimerService.class);
+            activity.startService(i);
+        }
+
+        return time;
+    }
+
+    public String stop() {
 
         Intent i = new Intent(activity, TimerService.class);
         activity.stopService(i);
-        activity.unregisterReceiver(this);
+
+        String time = this.time;
+        this.time = null;
 
         return time;
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String time = intent.getStringExtra("time");
-        timeText.setText(time);
+        time = intent.getStringExtra("time");
+        listener.onTextView(time);
+    }
+
+    public boolean isServiceRunning(Context c, Class<?> cls) {
+        ActivityManager am = (ActivityManager) c.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> runningService = am.getRunningServices(Integer.MAX_VALUE);
+        for (ActivityManager.RunningServiceInfo i : runningService) {
+            if (cls.getName().equals(i.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

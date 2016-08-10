@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import sho_1990.jp.how_many_minutes.R;
 import sho_1990.jp.how_many_minutes.databinding.FragmentTimeBinding;
@@ -64,21 +65,41 @@ public class TimeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mBinding = FragmentTimeBinding.bind(getView());
-        mMyTimer = MyTimer.newMyTimer(getActivity(), mBinding.timeView);
+        mMyTimer = MyTimer.newMyTimer(
+                getActivity(),
+                new MyTimer.MyTimerListener() {
+                    @Override
+                    public void onTextView(String time) {
+                        mBinding.timeView.setText(time);
+                    }
+                }
+        ).set();
+
+        if (mBinding.timeView.getText().length() == 0) {
+            initTimer(mBinding.timeView);
+        }
+
         mBinding.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                boolean start = "00:00.0".equals(mBinding.timeView.getText());
+                boolean start = getString(R.string.init_time).equals(mBinding.timeView.getText());
                 if (start) {
-                    mMyTimer.start(0, 100);
-                } else {
-                    final String time = (String) mMyTimer.stop();
-                    SectionSelectorFragment registerFragment = SectionSelectorFragment.newInstance(time);
-                    registerFragment.show(getFragmentManager(), null);
+                    mBinding.timeView.setText(mMyTimer.start());
+                    return;
                 }
+                final String time = mMyTimer.stop();
+                initTimer(mBinding.timeView);
+
+                SectionSelectorFragment registerFragment = SectionSelectorFragment.newInstance(time);
+                registerFragment.show(getFragmentManager(), null);
             }
         });
+
+    }
+
+    private void initTimer(TextView timeView) {
+        timeView.setText(getString(R.string.init_time));
     }
 
 
@@ -90,6 +111,7 @@ public class TimeFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        getActivity().unregisterReceiver(mMyTimer);
         mListener = null;
     }
 
