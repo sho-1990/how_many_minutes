@@ -13,6 +13,8 @@ import sho_1990.jp.how_many_minutes.R;
 import sho_1990.jp.how_many_minutes.databinding.FragmentTimeBinding;
 import sho_1990.jp.how_many_minutes.presenter.widget.MyTimer;
 
+import static android.R.attr.start;
+
 /**
  * 時間計測用画面Fragment
  */
@@ -83,8 +85,8 @@ public class TimeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                boolean start = getString(R.string.init_time).equals(mBinding.timeView.getText());
-                if (start) {
+                boolean stop = getString(R.string.init_time).equals(mBinding.timeView.getText());
+                if (stop) {
                     mBinding.timeView.setText(mMyTimer.start());
                     return;
                 }
