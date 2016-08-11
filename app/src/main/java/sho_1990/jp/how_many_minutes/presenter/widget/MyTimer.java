@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -71,6 +72,12 @@ public class MyTimer extends BroadcastReceiver {
         Intent i = new Intent(activity, TimerService.class);
         activity.stopService(i);
 
+        PreferenceManager
+                .getDefaultSharedPreferences(activity.getApplicationContext())
+                .edit()
+                .putInt(TimerService.TIMER_COUNT, 0)
+                .apply();
+
         String time = this.time;
         this.time = null;
 
@@ -83,7 +90,8 @@ public class MyTimer extends BroadcastReceiver {
         listener.onTextView(time);
     }
 
-    public boolean isServiceRunning(Context c, Class<?> cls) {
+    // Serviceの稼働状態をチェックする
+    private static boolean isServiceRunning(Context c, Class<?> cls) {
         ActivityManager am = (ActivityManager) c.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningServiceInfo> runningService = am.getRunningServices(Integer.MAX_VALUE);
         for (ActivityManager.RunningServiceInfo i : runningService) {

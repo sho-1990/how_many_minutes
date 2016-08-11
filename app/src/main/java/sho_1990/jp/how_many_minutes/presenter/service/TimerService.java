@@ -24,6 +24,7 @@ public class TimerService extends Service {
     private SharedPreferences mSharedPreferences;
 
     public static final String ACTION = "TimerService";
+    public static final String TIMER_COUNT = "count";
 
     @Nullable
     @Override
@@ -40,10 +41,10 @@ public class TimerService extends Service {
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
 
-        count = mSharedPreferences.getInt("count", 0);
+        count = mSharedPreferences.getInt(TIMER_COUNT, 0);
 
         timer = new Timer();
-        timer.schedule(new TimerTask() {
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 count++;
@@ -57,7 +58,7 @@ public class TimerService extends Service {
 
                 mSharedPreferences
                         .edit()
-                        .putInt("count", count)
+                        .putInt(TIMER_COUNT, count)
                         .apply();
 
                 sendBroadcast(i);
@@ -73,14 +74,6 @@ public class TimerService extends Service {
         if (timer != null) {
             timer.cancel();
         }
-
-        if (mSharedPreferences != null) {
-            mSharedPreferences
-                    .edit()
-                    .putInt("count", 0)
-                    .apply();
-        }
-
         timer = null;
         Log.d("SERVICE STOP", this.getClass().getName());
     }
