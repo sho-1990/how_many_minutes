@@ -59,6 +59,11 @@ public class MyTimer extends BroadcastReceiver {
 
     }
 
+    /** viewの更新を止める。内部的にタイマーは動き続けている */
+    public void pauseView() {
+        activity.unregisterReceiver(this);
+    }
+
     /**
      * タイマーを開始する。set()の後に呼び出す
      *
@@ -68,7 +73,7 @@ public class MyTimer extends BroadcastReceiver {
 
         if (!isServiceRunning(activity, TimerService.class)) {
 
-            Log.d("SERVICE STARTED", "TimerService");
+            Log.d("SERVICE NOT STARTED", "TimerService");
 
             Intent i = new Intent(activity, TimerService.class);
             activity.startService(i);

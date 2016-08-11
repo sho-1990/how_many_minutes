@@ -41,7 +41,7 @@ public class TimerService extends Service {
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
 
-        // タイマー動作中にアプリを停止した時に前回停止した時点でのタイムを出力させるために使用する。
+        // タイマー動作中にアプリを停止した時に現時点でのタイムを出力させるために使用する。
         // Serviceクラスはちょくちょく止まるので必要
         count = mSharedPreferences.getInt(TIMER_COUNT, 0);
 

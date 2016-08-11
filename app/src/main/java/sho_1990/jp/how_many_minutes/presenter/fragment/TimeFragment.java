@@ -54,6 +54,15 @@ public class TimeFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if (mMyTimer != null) {
+            mMyTimer.set();
+        }
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -99,6 +108,15 @@ public class TimeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mMyTimer != null) {
+            mMyTimer.pauseView();
+        }
+
+    }
+
     private void initTimer(TextView timeView) {
         timeView.setText(getString(R.string.init_time));
     }
@@ -112,7 +130,6 @@ public class TimeFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        getActivity().unregisterReceiver(mMyTimer);
         mListener = null;
     }
 
