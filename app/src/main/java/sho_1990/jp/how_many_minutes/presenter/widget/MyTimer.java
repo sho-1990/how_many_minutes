@@ -16,7 +16,8 @@ import sho_1990.jp.how_many_minutes.presenter.service.TimerService;
 
 /**
  *
- * ストップウォッチ表示用Widget
+ * ストップウォッチ表示用BroadcastReceiver
+ * 実際のタイマー機能はTimerServiceクラスで行う。
  *
  * Created on 2016/08/01.
  */
@@ -24,6 +25,7 @@ import sho_1990.jp.how_many_minutes.presenter.service.TimerService;
 public class MyTimer extends BroadcastReceiver {
 
     public interface MyTimerListener {
+        /** 現在の経過時間を返す。 */
         void onTextView(String time);
     }
 
@@ -42,6 +44,12 @@ public class MyTimer extends BroadcastReceiver {
         return new MyTimer(activity, listener);
     }
 
+    /**
+     * start()の前に呼び出す
+     *
+     * @return this
+     *
+     * */
     public MyTimer set() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(TimerService.ACTION);
@@ -52,6 +60,8 @@ public class MyTimer extends BroadcastReceiver {
     }
 
     /**
+     * タイマーを開始する。set()の後に呼び出す
+     *
      * @return 自分自身
      * */
     public String start() {
@@ -67,6 +77,11 @@ public class MyTimer extends BroadcastReceiver {
         return time;
     }
 
+    /**
+     * タイマーを止める。
+     *
+     * @return 時刻(形式 00:00.0)
+     * */
     public String stop() {
 
         Intent i = new Intent(activity, TimerService.class);
@@ -90,7 +105,11 @@ public class MyTimer extends BroadcastReceiver {
         listener.onTextView(time);
     }
 
-    // Serviceの稼働状態をチェックする
+    /** Serviceの稼働状態をチェックする
+     *
+     * @return 稼働状態(true 稼働中
+     *                   false 停止中)
+     * */
     private static boolean isServiceRunning(Context c, Class<?> cls) {
         ActivityManager am = (ActivityManager) c.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningServiceInfo> runningService = am.getRunningServices(Integer.MAX_VALUE);

@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.Locale;
 import java.util.Timer;
@@ -23,6 +22,7 @@ public class TimerService extends Service {
 
     private SharedPreferences mSharedPreferences;
 
+    // todo enumにするべきか
     public static final String ACTION = "TimerService";
     public static final String TIMER_COUNT = "count";
 
@@ -41,6 +41,8 @@ public class TimerService extends Service {
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
 
+        // タイマー動作中にアプリを停止した時に前回停止した時点でのタイムを出力させるために使用する。
+        // Serviceクラスはちょくちょく止まるので必要
         count = mSharedPreferences.getInt(TIMER_COUNT, 0);
 
         timer = new Timer();
@@ -54,8 +56,8 @@ public class TimerService extends Service {
                 // 桁数を合わせるために02d(2桁)を設定
                 Intent i = new Intent(ACTION);
                 i.putExtra("time", String.format(Locale.JAPANESE, "%1$02d:%2$02d.%3$01d", mm, ss, ms));
-                Log.d("TimerService", i.getStringExtra("time"));
 
+                // 現時点のタイムを保存。todo 外に出したい
                 mSharedPreferences
                         .edit()
                         .putInt(TIMER_COUNT, count)
@@ -75,6 +77,5 @@ public class TimerService extends Service {
             timer.cancel();
         }
         timer = null;
-        Log.d("SERVICE STOP", this.getClass().getName());
     }
 }
