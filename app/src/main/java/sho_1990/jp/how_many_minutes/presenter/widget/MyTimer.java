@@ -99,6 +99,7 @@ public class MyTimer extends BroadcastReceiver {
                 .apply();
 
         String time = this.time;
+
         this.time = null;
 
         return time;
@@ -107,6 +108,9 @@ public class MyTimer extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         time = intent.getStringExtra("time");
+
+        Log.d("onRECEIVE", time);
+
         listener.onTextView(time);
     }
 

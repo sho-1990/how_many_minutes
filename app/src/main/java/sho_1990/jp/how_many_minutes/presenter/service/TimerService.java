@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.Locale;
 import java.util.Timer;
@@ -62,6 +63,9 @@ public class TimerService extends Service {
                         .edit()
                         .putInt(TIMER_COUNT, count)
                         .apply();
+
+                Log.d("TIMER SERVICE", i.getStringExtra("time"));
+
 
                 sendBroadcast(i);
             }

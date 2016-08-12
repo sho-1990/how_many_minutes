@@ -3,156 +3,156 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\classes.jar"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="false"
         revision="24.0.1"
-        sha1="6d7d803871e3203465f71a163e7af104f807b446">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.1.1_4f854ae6df389357fa690aa7321ab5393d98445a\classes.dex" />
+        sha1="f884a97b9f5a03e5b4f15146e9da0e4400367f83">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_00ee1730f8a785d62b624b8255cddf58f5540dcc/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="D:\Android\android-studio\gradle\m2repository\com\android\databinding\baseLibrary\2.2.0-beta1\baseLibrary-2.2.0-beta1.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="60dc6fa490bcf0ffab047cf673c3d2c5c5beadef">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\baseLibrary-2.2.0-beta1_f202912489e79ec6789f829b9aa116ef187f8d43\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="c21aa94cf6b537b955568595c3cc12f0a8212d81">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_870ef90b8acef3c74e579859001c6d5c11a766eb\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.1.1_28f6bc935252232b6f31eb195529900d26e80328\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="ff4580a216e9d6a8547cdc7010c1dcf6d37f80d9">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_da18ff974d4be9ebf99ce2d3f88a05ea90f323b3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.getkeepsafe.relinker\relinker\1.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="264f0bc4c0680cfe7a60fea1f12a43f1ab48e7c8">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.getkeepsafe.relinker-relinker-1.2.1_c37ef4d85334eef721bbda9882520463c7d5fa1f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\.gradle\caches\modules-2\files-2.1\io.realm\realm-annotations\1.1.1\8e720b6ccaa30f4201a3f347f8959f620823e848\realm-annotations-1.1.1.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="8e720b6ccaa30f4201a3f347f8959f620823e848">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\realm-annotations-1.1.1_7b34492bdf5f370a7d1457e8405ba077601e0118\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.0-alpha6\constraint-layout-solver-1.0.0-alpha6.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="539cfaee6c35087cdebad7e3a3bc0f52d1261d93">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.0-alpha6_6335f8090d6ce100f31d4d5ef10c2f7031c5b21b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\io.realm\realm-android-library\1.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="c82387ef0b47739dc3fe7a92d910ad3f0e7cdf01">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\io.realm-realm-android-library-1.1.1_aa034a55a1d8216cecd9b34940495884f8fc4641\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.databinding\library\1.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="957dc30b1495f8689271e00d56ab09cc9192df02">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.databinding-library-1.2.1_d2a49af3bc7dbee34b31320676f13b587983d1dd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="f62e763609f65e47dc6c498760a4accf02776788">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.1.1_d9e57c4ba988400cffcb70de964e78ce663c56e7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="787871951412550519b0222aba3c9df4cea49875">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.1.1_5ad94a5d157ea3d797c330e12b968ea62f8ef3d1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.1.1\support-annotations-24.1.1.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.1.1_8ec3e9bd9b256b249f1007544b9392113b4de95a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-alpha6\jars\classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="24.0.1"
-        sha1="683e0c40e56227acb71bcd29fee25fe417ae734e">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support.constraint-constraint-layout-1.0.0-alpha6_16bedbb76aed57978e41d3a91472d500824e368f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\libs\internal_impl-24.1.1.jar"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.1.1/jars/libs/internal_impl-24.1.1.jar"
         jumboMode="true"
         optimize="false"
         revision="24.0.1"
         sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.1.1_c81fdfefb0298520e4176eb065584dfdb3603a87\classes.dex" />
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.1.1_320885e3ad1764a1876e677071cbe87ac14d1a2f/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\jars\classes.jar"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.databinding/library/1.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="false"
         revision="24.0.1"
-        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.1.1_784c516c5cffe3fd511ff463736f5813b7bcc601\classes.dex" />
+        sha1="957dc30b1495f8689271e00d56ab09cc9192df02">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.databinding-library-1.2.1_4d0cf6956d88826b3bf25fd9cea53cecbc796af5/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\exploded-aar\com.android.databinding\adapters\1.2.1\jars\classes.jar"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/io.realm/realm-android-library/1.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="c82387ef0b47739dc3fe7a92d910ad3f0e7cdf01">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/io.realm-realm-android-library-1.1.1_a4a6fdeeb2a76409edc81802293d6daeb3aff5c4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.1.1_0a62d7618d1c367c0369f009b7a2edb28d9ec29a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/android/databinding/baseLibrary/2.2.0-beta1/baseLibrary-2.2.0-beta1.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="60dc6fa490bcf0ffab047cf673c3d2c5c5beadef">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/baseLibrary-2.2.0-beta1_867ee42a382979eb447e414516354603491bc2da/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.databinding/adapters/1.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="false"
         revision="24.0.1"
         sha1="c56d29136c2257f63f08c29c4e739efb03b06c7d">
-        <dex dex="C:\Users\semib\AndroidStudioProjects\how_many_minutes\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.databinding-adapters-1.2.1_807510faab32509519ba05eabd040576f1e51e20\classes.dex" />
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.databinding-adapters-1.2.1_1789123811bfc745664f5fc6f3109c6a9284fe58/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.1.1/support-annotations-24.1.1.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.1.1_c92b82f0b7edfb658a48e9c9f1bec2e2a7e647c9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="f62e763609f65e47dc6c498760a4accf02776788">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.1.1_2ff332eebe1085d099f1240e872840a96dba4244/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="787871951412550519b0222aba3c9df4cea49875">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.1.1_b434a71772518c8fc2bcb1ef4572d3126b6acc58/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.0-alpha6/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="683e0c40e56227acb71bcd29fee25fe417ae734e">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support.constraint-constraint-layout-1.0.0-alpha6_d9c18d0ae62a456dd9f223121ff7262f9cf90099/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="7e8a85e78fd616a9e437042fd2e1999386c8fc36">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_4a5736d58e7da9d628fc756fec0977f68537bfe6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.1.1_6088af087b90d036ec35cc5c61c90c70fc63a4cf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.1.1_e50126f12f805663c45c04f54fa410efe6a6759b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/.gradle/caches/modules-2/files-2.1/io.realm/realm-annotations/1.1.1/8e720b6ccaa30f4201a3f347f8959f620823e848/realm-annotations-1.1.1.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="8e720b6ccaa30f4201a3f347f8959f620823e848">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/realm-annotations-1.1.1_1c39826438d07c396377bdcbd187fe939b451556/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-alpha6/constraint-layout-solver-1.0.0-alpha6.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="539cfaee6c35087cdebad7e3a3bc0f52d1261d93">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.0-alpha6_ff663c272765b69cc701d734e1bb90ea2ebc3d16/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/exploded-aar/com.getkeepsafe.relinker/relinker/1.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="24.0.1"
+        sha1="264f0bc4c0680cfe7a60fea1f12a43f1ab48e7c8">
+        <dex dex="/Users/sh.sato/projects/private/how_many_minutes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.getkeepsafe.relinker-relinker-1.2.1_7f1ae844be7888bbb949caef396ce6394d5a2b4d/classes.dex" />
     </item>
 
 </items>
