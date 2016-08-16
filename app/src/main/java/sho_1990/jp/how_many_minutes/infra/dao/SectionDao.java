@@ -2,6 +2,8 @@ package sho_1990.jp.how_many_minutes.infra.dao;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import io.realm.Realm;
 import sho_1990.jp.how_many_minutes.Status;
 import sho_1990.jp.how_many_minutes.infra.Section;
@@ -22,6 +24,10 @@ public class SectionDao {
         }
 
         return new SectionDao();
+    }
+
+    public List<Section> sectionListAll() {
+        return Realm.getDefaultInstance().where(Section.class).findAll();
     }
 
     public Status insert(@NonNull final Section data) {

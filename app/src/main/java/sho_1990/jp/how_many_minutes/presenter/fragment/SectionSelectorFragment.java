@@ -9,15 +9,20 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.List;
 
 import sho_1990.jp.how_many_minutes.R;
 import sho_1990.jp.how_many_minutes.Status;
 import sho_1990.jp.how_many_minutes.databinding.SectionSelectorBinding;
 import sho_1990.jp.how_many_minutes.infra.Section;
 import sho_1990.jp.how_many_minutes.infra.dao.SectionDao;
+
+import static sho_1990.jp.how_many_minutes.infra.dao.SectionDao.newSectionDao;
 
 /**
  * 区間登録用Dialogクラス
@@ -56,9 +61,6 @@ public class SectionSelectorFragment extends DialogFragment {
         final Bundle args = getArguments();
         time = args.getString(ARG_TIME, getActivity().getString(R.string.init_time));
 
-        // --- todo テーブルから区間名を引っ張ってくる
-        setSectionRadios();
-
         // ---
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -68,42 +70,47 @@ public class SectionSelectorFragment extends DialogFragment {
                 null,
                 false
         );
+        // 区間名ラジオボタングループ
+        setSectionRadios(mBinding.sectionSelector);
 
         builder
             .setTitle(time)
             .setPositiveButton(getActivity().getString(R.string.register), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-
                 // 新規登録の場合、区間名登録処理
                 if (mBinding.selectNewSection.isChecked()) {
                     Section section = new Section();
                     section.setName(mBinding.textNewSection.getText().toString());
                     section.setDate((String) DateFormat.format("yyyy/MM/dd hh:mm:ss", new Date()));
-                    Status status = SectionDao.newSectionDao().insert(section);
+                    Status status = newSectionDao().insert(section);
 
                     if (status == Status.SUCCESS) {
                         Toast.makeText(getActivity(), "成功", Toast.LENGTH_SHORT).show();
                     }
+                    return;
                 }
 
-
-
-
-
-
+                
 
             }
-        })
-            .setView(mBinding.getRoot());
+        }).setView(mBinding.getRoot());
 
         return builder.create();
 
     }
 
-    private void setSectionRadios() {
+    private void setSectionRadios(RadioGroup radios) {
 
+        List<Section> sections = SectionDao.newSectionDao().sectionListAll();
+        if (sections.isEmpty()) {
+            return;
+        }
 
+        for (Section s : sections) {
+            RadioButton r = new RadioButton(getActivity());
+            r.setText(s.getName());
+            radios.addView(r);
+        }
     }
 }
