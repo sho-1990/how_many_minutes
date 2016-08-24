@@ -2,46 +2,40 @@ package sho_1990.jp.how_many_minutes.infra.dao;
 
 import android.support.annotation.NonNull;
 
-import java.util.List;
-
 import io.realm.Realm;
 import sho_1990.jp.how_many_minutes.Status;
-import sho_1990.jp.how_many_minutes.infra.Sections;
+import sho_1990.jp.how_many_minutes.infra.TravelTimes;
 
 /**
- * Created on 2016/08/06.
+ * Created on 2016/08/24.
  */
 
-public class SectionDao {
+public class TravelTimesDao {
 
-    private static SectionDao mSectionDao;
+    private static TravelTimesDao travelTimesDao;
 
-    private SectionDao() {}
+    private TravelTimesDao() {}
 
-    public static SectionDao newSectionDao() {
-        if (mSectionDao != null) {
-            return mSectionDao;
+    public static TravelTimesDao newInstance() {
+        if (travelTimesDao == null) {
+            return new TravelTimesDao();
         }
-
-        return new SectionDao();
+        return travelTimesDao;
     }
 
-    public List<Sections> sectionListAll() {
-        return Realm.getDefaultInstance().where(Sections.class).findAll();
-    }
-
-    public Status insert(@NonNull final Sections data) {
+    public Status insert(@NonNull final TravelTimes data) {
 
         final Status[] status = new Status[1];
 
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransactionAsync(new Realm.Transaction() {
-
             @Override
             public void execute(Realm realm) {
-                Sections section = realm.createObject(Sections.class);
-                section.setName(data.getName());
-                section.setUpdateDate(data.getUpdateDate());
+                TravelTimes t = realm.createObject(TravelTimes.class);
+                t.setSectionId(data.getSectionId());
+                t.setTime(data.getTime());
+                t.setTravelTimesId(data.getTravelTimesId());
+                t.setUpdateDate(data.getUpdateDate());
 
             }
         }, new Realm.Transaction.OnSuccess() {

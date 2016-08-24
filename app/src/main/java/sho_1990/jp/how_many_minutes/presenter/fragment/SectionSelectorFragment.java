@@ -7,22 +7,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.util.Date;
 import java.util.List;
 
 import sho_1990.jp.how_many_minutes.R;
 import sho_1990.jp.how_many_minutes.Status;
 import sho_1990.jp.how_many_minutes.databinding.SectionSelectorBinding;
-import sho_1990.jp.how_many_minutes.infra.Section;
+import sho_1990.jp.how_many_minutes.domain.SectionRegisterUseCase;
+import sho_1990.jp.how_many_minutes.infra.Sections;
 import sho_1990.jp.how_many_minutes.infra.dao.SectionDao;
-
-import static sho_1990.jp.how_many_minutes.infra.dao.SectionDao.newSectionDao;
 
 /**
  * 区間登録用Dialogクラス
@@ -80,10 +77,10 @@ public class SectionSelectorFragment extends DialogFragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // 新規登録の場合、区間名登録処理
                 if (mBinding.selectNewSection.isChecked()) {
-                    Section section = new Section();
-                    section.setName(mBinding.textNewSection.getText().toString());
-                    section.setDate((String) DateFormat.format("yyyy/MM/dd hh:mm:ss", new Date()));
-                    Status status = newSectionDao().insert(section);
+
+                    Status status = SectionRegisterUseCase
+                            .newInstance()
+                            .resisterSection(mBinding.textNewSection.getText().toString());
 
                     if (status == Status.SUCCESS) {
                         Toast.makeText(getActivity(), "成功", Toast.LENGTH_SHORT).show();
@@ -92,6 +89,8 @@ public class SectionSelectorFragment extends DialogFragment {
                 }
 
                 
+
+
 
             }
         }).setView(mBinding.getRoot());
@@ -102,12 +101,12 @@ public class SectionSelectorFragment extends DialogFragment {
 
     private void setSectionRadios(RadioGroup radios) {
 
-        List<Section> sections = SectionDao.newSectionDao().sectionListAll();
+        List<Sections> sections = SectionDao.newSectionDao().sectionListAll();
         if (sections.isEmpty()) {
             return;
         }
 
-        for (Section s : sections) {
+        for (Sections s : sections) {
             RadioButton r = new RadioButton(getActivity());
             r.setText(s.getName());
             radios.addView(r);
