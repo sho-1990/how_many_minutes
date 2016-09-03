@@ -12,13 +12,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.List;
 
 import sho_1990.jp.how_many_minutes.R;
 import sho_1990.jp.how_many_minutes.Status;
 import sho_1990.jp.how_many_minutes.databinding.SectionSelectorBinding;
 import sho_1990.jp.how_many_minutes.domain.SectionRegisterUseCase;
+import sho_1990.jp.how_many_minutes.domain.TimeRegisterUseCase;
 import sho_1990.jp.how_many_minutes.infra.Sections;
+import sho_1990.jp.how_many_minutes.infra.TravelTimes;
 import sho_1990.jp.how_many_minutes.infra.dao.SectionDao;
 
 /**
@@ -27,7 +30,7 @@ import sho_1990.jp.how_many_minutes.infra.dao.SectionDao;
 public class SectionSelectorFragment extends DialogFragment {
 
     // 区間移動時間
-    private String time;
+    private long time;
 
     private SectionSelectorBinding mBinding;
 
@@ -41,12 +44,10 @@ public class SectionSelectorFragment extends DialogFragment {
     public SectionSelectorFragment() {
     }
 
-    // 使う
-    @SuppressWarnings("unused")
-    public static SectionSelectorFragment newInstance(@NonNull String time) {
+    public static SectionSelectorFragment newInstance(long time) {
         SectionSelectorFragment fragment = new SectionSelectorFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_TIME, time);
+        args.putLong(ARG_TIME, time);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,7 +57,7 @@ public class SectionSelectorFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         final Bundle args = getArguments();
-        time = args.getString(ARG_TIME, getActivity().getString(R.string.init_time));
+        time = args.getLong(ARG_TIME);
 
         // ---
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -71,27 +72,38 @@ public class SectionSelectorFragment extends DialogFragment {
         setSectionRadios(mBinding.sectionSelector);
 
         builder
-            .setTitle(time)
+            .setTitle(String.valueOf(time))
+            .setNegativeButton("キャンセル", null)
             .setPositiveButton(getActivity().getString(R.string.register), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // 新規登録の場合、区間名登録処理
+                // registerTimeNotExistingSection
                 if (mBinding.selectNewSection.isChecked()) {
+                    SectionRegisterUseCase useCase = SectionRegisterUseCase.newInstance();
 
-                    Status status = SectionRegisterUseCase
-                            .newInstance()
-                            .resisterSection(mBinding.textNewSection.getText().toString());
-
-                    if (status == Status.SUCCESS) {
-                        Toast.makeText(getActivity(), "成功", Toast.LENGTH_SHORT).show();
+                    if (useCase.duplicateCheck(mBinding.textNewSection.getText().toString()) == Status.DUPLICATE) {
+                        return;
                     }
+                    Status status = useCase
+                            .resisterSection(mBinding.textNewSection.getText().toString(), time);
+
+                    if (status == Status.OK) {
+                        successToast();
+                    }
+
                     return;
                 }
 
-                
+                int checkedId = mBinding.sectionSelector.getCheckedRadioButtonId();
+                RadioButton r = (RadioButton) mBinding.sectionSelector.findViewById(checkedId);
+                String sectionName = r.getText().toString();
+                int sectionId = SectionRegisterUseCase.newInstance().findSectionId(sectionName);
 
-
-
+                // タイム登録
+                Status status = registerTimeExistingSection(sectionId);
+                if (status == Status.OK) {
+                    successToast();
+                }
             }
         }).setView(mBinding.getRoot());
 
@@ -112,4 +124,17 @@ public class SectionSelectorFragment extends DialogFragment {
             radios.addView(r);
         }
     }
+
+    private Status registerTimeExistingSection(int sectionId) {
+        TravelTimes travelTimes = new TravelTimes();
+        travelTimes.setTime(time);
+        travelTimes.setSectionId(sectionId);
+        travelTimes.setUpdateDate(new Date().getTime());
+        return TimeRegisterUseCase.newInstance().registerTime(travelTimes);
+    }
+
+    private void successToast() {
+        Toast.makeText(getActivity(), "成功", Toast.LENGTH_SHORT).show();
+    }
 }
+

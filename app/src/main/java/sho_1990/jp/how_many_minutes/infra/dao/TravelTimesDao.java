@@ -16,7 +16,7 @@ public class TravelTimesDao {
 
     private TravelTimesDao() {}
 
-    public static TravelTimesDao newInstance() {
+    public static TravelTimesDao newTravelTimesDao() {
         if (travelTimesDao == null) {
             return new TravelTimesDao();
         }
@@ -41,7 +41,7 @@ public class TravelTimesDao {
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                status[0] = result(Status.SUCCESS);
+                status[0] = result(Status.OK);
             }
         });
 

@@ -2,7 +2,9 @@
 <manifest package="sho_1990.jp.how_many_minutes"
           xmlns:android="http://schemas.android.com/apk/res/android">
     <application
+        android:name=".MinutesApp"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -10,11 +12,10 @@
         <activity android:name=".presenter.TimeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <service android:name=".presenter.service.TimerService" />
     </application>
 
 </manifest>

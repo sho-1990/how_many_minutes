@@ -2,7 +2,6 @@ package sho_1990.jp.how_many_minutes.infra;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
 /**
  * Created on 2016/08/16.
@@ -12,11 +11,8 @@ public class TravelTimes extends RealmObject {
 
     @PrimaryKey
     private int travelTimesId;
-    @Required
     private long time;
-    @Required
-    private String sectionId;
-    @Required
+    private int sectionId;
     private long updateDate;
 
     public int getTravelTimesId() {
@@ -35,11 +31,11 @@ public class TravelTimes extends RealmObject {
         this.time = time;
     }
 
-    public String getSectionId() {
+    public int getSectionId() {
         return sectionId;
     }
 
-    public void setSectionId(String sectionId) {
+    public void setSectionId(int sectionId) {
         this.sectionId = sectionId;
     }
 

@@ -1,6 +1,7 @@
 package sho_1990.jp.how_many_minutes.infra.dao;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -14,6 +15,11 @@ import sho_1990.jp.how_many_minutes.infra.Sections;
 
 public class SectionDao {
 
+    public interface SectionDaoListener {
+        Status onSuccess(int sectionId);
+    }
+
+
     private static SectionDao mSectionDao;
 
     private SectionDao() {}
@@ -26,15 +32,28 @@ public class SectionDao {
         return new SectionDao();
     }
 
+    public int findSectionId(@NonNull String sectionName) {
+        Sections sections = Realm
+                .getDefaultInstance()
+                .where(Sections.class)
+                .equalTo("name", sectionName)
+                .findFirst();
+
+        if (sections == null) {
+            return -1;
+        }
+        return sections.getSectionId();
+    }
+
     public List<Sections> sectionListAll() {
         return Realm.getDefaultInstance().where(Sections.class).findAll();
     }
 
-    public Status insert(@NonNull final Sections data) {
+    public Status insert(@NonNull final Sections data, @Nullable final SectionDaoListener listener) {
 
         final Status[] status = new Status[1];
 
-        Realm realm = Realm.getDefaultInstance();
+        final Realm realm = Realm.getDefaultInstance();
         realm.executeTransactionAsync(new Realm.Transaction() {
 
             @Override
@@ -47,17 +66,24 @@ public class SectionDao {
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                status[0] = result(Status.SUCCESS);
+                if (listener != null) {
+                    status[0] = listener.onSuccess(findSectionId(data.getName()));
+                } else {
+                    status[0] = Status.OK;
+                }
             }
         });
 
         return status[0];
     }
 
-    /**
-     * 処理結果を返す
-     */
-    private Status result(Status status) {
-        return status;
+    public boolean duplicate(@NonNull final String name) {
+
+        Realm realm = Realm.getDefaultInstance();
+        return realm
+                .where(Sections.class)
+                .equalTo("name", name)
+                .findAll()
+                .isEmpty();
     }
 }

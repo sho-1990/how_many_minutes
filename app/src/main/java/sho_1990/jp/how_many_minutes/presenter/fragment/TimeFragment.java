@@ -57,7 +57,7 @@ public class TimeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (mMyTimer != null) {
-            mMyTimer.set();
+            mMyTimer.restart();
         }
     }
 
@@ -82,22 +82,18 @@ public class TimeFragment extends Fragment {
                         mBinding.timeView.setText(time);
                     }
                 }
-        ).set();
-
-        if (mBinding.timeView.getText().length() == 0) {
-            initTimer(mBinding.timeView);
-        }
-
+        );
+        initTimer(mBinding.timeView);
         mBinding.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 boolean stop = getString(R.string.init_time).equals(mBinding.timeView.getText());
                 if (stop) {
-                    mBinding.timeView.setText(mMyTimer.start());
+                    mMyTimer.start(0L, 100L);
                     return;
                 }
-                final String time = mMyTimer.stop();
+                long time = mMyTimer.stop();
                 initTimer(mBinding.timeView);
 
                 // 区間登録用ダイアログ表示
@@ -112,12 +108,13 @@ public class TimeFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (mMyTimer != null) {
-            mMyTimer.pauseView();
+            mMyTimer.pause();
         }
 
     }
 
     private void initTimer(TextView timeView) {
+        mMyTimer.set();
         timeView.setText(getString(R.string.init_time));
     }
 
