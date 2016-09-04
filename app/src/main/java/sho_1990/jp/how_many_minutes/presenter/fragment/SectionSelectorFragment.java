@@ -70,6 +70,7 @@ public class SectionSelectorFragment extends DialogFragment {
         );
         // 区間名ラジオボタングループ
         setSectionRadios(mBinding.sectionSelector);
+        mBinding.selectNewSection.setChecked(true);
 
         builder
             .setTitle(String.valueOf(time))
