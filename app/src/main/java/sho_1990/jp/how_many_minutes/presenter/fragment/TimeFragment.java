@@ -3,6 +3,8 @@ package sho_1990.jp.how_many_minutes.presenter.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import sho_1990.jp.how_many_minutes.databinding.FragmentTimeBinding;
 import sho_1990.jp.how_many_minutes.presenter.widget.MyTimer;
 
 /**
- * 時間計測用画面Fragment
+ * 時間計測画面Fragment
  */
 public class TimeFragment extends Fragment {
 
@@ -54,10 +56,10 @@ public class TimeFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         if (mMyTimer != null) {
-            mMyTimer.restart();
+            mMyTimer.set();
         }
     }
 
@@ -78,12 +80,17 @@ public class TimeFragment extends Fragment {
                 getActivity(),
                 new MyTimer.MyTimerListener() {
                     @Override
-                    public void onTextView(String time) {
-                        mBinding.timeView.setText(time);
+                    public void onTextView(final String time) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mBinding.timeView.setText(time);
+                            }
+                        });
                     }
                 }
         );
-        initTimer(mBinding.timeView);
+        mMyTimer.set();
         mBinding.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,8 +101,7 @@ public class TimeFragment extends Fragment {
                     return;
                 }
                 long time = mMyTimer.stop();
-                initTimer(mBinding.timeView);
-
+                mMyTimer.set();
                 // 区間登録用ダイアログ表示
                 SectionSelectorFragment registerFragment = SectionSelectorFragment.newInstance(time);
                 registerFragment.show(getFragmentManager(), null);
@@ -114,7 +120,6 @@ public class TimeFragment extends Fragment {
     }
 
     private void initTimer(TextView timeView) {
-        mMyTimer.set();
         timeView.setText(getString(R.string.init_time));
     }
 
@@ -127,6 +132,7 @@ public class TimeFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        mMyTimer = null;
         mListener = null;
     }
 

@@ -31,12 +31,12 @@ public class TravelTimesDao {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                TravelTimes t = realm.createObject(TravelTimes.class);
+                TravelTimes t = new TravelTimes();
                 t.setSectionId(data.getSectionId());
                 t.setTime(data.getTime());
-                t.setTravelTimesId(data.getTravelTimesId());
+                t.setTravelTimesId(realm.where(TravelTimes.class).max("travelTimesId").intValue() + 1);
                 t.setUpdateDate(data.getUpdateDate());
-
+                realm.copyToRealm(t);
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

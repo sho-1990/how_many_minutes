@@ -9,6 +9,8 @@ import io.realm.Realm;
 import sho_1990.jp.how_many_minutes.Status;
 import sho_1990.jp.how_many_minutes.infra.Sections;
 
+import static io.realm.Realm.getDefaultInstance;
+
 /**
  * Created on 2016/08/06.
  */
@@ -33,8 +35,8 @@ public class SectionDao {
     }
 
     public int findSectionId(@NonNull String sectionName) {
-        Sections sections = Realm
-                .getDefaultInstance()
+        Sections sections =
+                getDefaultInstance()
                 .where(Sections.class)
                 .equalTo("name", sectionName)
                 .findFirst();
@@ -53,14 +55,16 @@ public class SectionDao {
 
         final Status[] status = new Status[1];
 
-        final Realm realm = Realm.getDefaultInstance();
+        final Realm realm = getDefaultInstance();
         realm.executeTransactionAsync(new Realm.Transaction() {
 
             @Override
             public void execute(Realm realm) {
-                Sections section = realm.createObject(Sections.class);
+                Sections section = new Sections();
+                section.setSectionId(realm.where(Sections.class).max("sectionId").intValue() + 1);
                 section.setName(data.getName());
                 section.setUpdateDate(data.getUpdateDate());
+                realm.copyToRealm(section);
 
             }
         }, new Realm.Transaction.OnSuccess() {
@@ -79,8 +83,8 @@ public class SectionDao {
 
     public boolean duplicate(@NonNull final String name) {
 
-        Realm realm = Realm.getDefaultInstance();
-        return realm
+        Realm realm = getDefaultInstance();
+        return ! realm
                 .where(Sections.class)
                 .equalTo("name", name)
                 .findAll()
