@@ -80,18 +80,9 @@ public class SectionSelectorFragment extends DialogFragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // registerTimeNotExistingSection
                 if (mBinding.selectNewSection.isChecked()) {
-                    SectionRegisterUseCase useCase = SectionRegisterUseCase.newInstance();
-
-                    if (useCase.duplicateCheck(mBinding.textNewSection.getText().toString()) == Status.DUPLICATE) {
-                        return;
-                    }
-                    Status status = useCase
-                            .resisterSection(mBinding.textNewSection.getText().toString(), time);
-
-                    if (status == Status.OK) {
+                    if (registerTimeNotExistingSection() == Status.OK) {
                         successToast();
                     }
-
                     return;
                 }
 
@@ -132,6 +123,16 @@ public class SectionSelectorFragment extends DialogFragment {
         travelTimes.setSectionId(sectionId);
         travelTimes.setUpdateDate(new Date().getTime());
         return TimeRegisterUseCase.newInstance().registerTime(travelTimes);
+    }
+
+    private Status registerTimeNotExistingSection() {
+        SectionRegisterUseCase useCase = SectionRegisterUseCase.newInstance();
+        if (useCase.duplicateCheck(mBinding.textNewSection.getText().toString()) == Status.DUPLICATE) {
+            return Status.DUPLICATE;
+        }
+
+        return useCase
+                .resisterSection(mBinding.textNewSection.getText().toString(), time);
     }
 
     private void successToast() {
