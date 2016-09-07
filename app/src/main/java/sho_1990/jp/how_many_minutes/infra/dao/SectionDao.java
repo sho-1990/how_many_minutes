@@ -17,6 +17,8 @@ import static io.realm.Realm.getDefaultInstance;
 
 public class SectionDao {
 
+    private static final int FIRST_SECTION_ID = 0;
+
     public interface SectionDaoListener {
         Status onSuccess(int sectionId);
     }
@@ -51,6 +53,15 @@ public class SectionDao {
         return Realm.getDefaultInstance().where(Sections.class).findAll();
     }
 
+    public int findNextSectionId() {
+        Number id = Realm.getDefaultInstance().where(Sections.class).max("sectionId");
+        if (id == null) {
+            return FIRST_SECTION_ID;
+        } else {
+            return id.intValue() + 1;
+        }
+    }
+
     public Status insert(@NonNull final Sections data, @Nullable final SectionDaoListener listener) {
 
         final Status[] status = new Status[1];
@@ -60,8 +71,9 @@ public class SectionDao {
 
             @Override
             public void execute(Realm realm) {
+
                 Sections section = new Sections();
-                section.setSectionId(realm.where(Sections.class).max("sectionId").intValue() + 1);
+                section.setSectionId(data.getSectionId());
                 section.setName(data.getName());
                 section.setUpdateDate(data.getUpdateDate());
                 realm.copyToRealm(section);

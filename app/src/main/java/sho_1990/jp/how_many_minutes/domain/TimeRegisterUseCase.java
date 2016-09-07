@@ -29,6 +29,7 @@ public class TimeRegisterUseCase {
         t.setTime(travelTimes.getTime());
         t.setUpdateDate((new Date()).getTime());
         t.setSectionId(travelTimes.getSectionId());
+        t.setTravelTimesId(TravelTimesDao.newTravelTimesDao().findNextTravelTimesId());
         return TravelTimesDao.newTravelTimesDao().insert(t);
 
     }

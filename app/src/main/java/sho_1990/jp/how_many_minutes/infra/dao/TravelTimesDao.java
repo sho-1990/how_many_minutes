@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import io.realm.Realm;
 import sho_1990.jp.how_many_minutes.Status;
+import sho_1990.jp.how_many_minutes.infra.Sections;
 import sho_1990.jp.how_many_minutes.infra.TravelTimes;
 
 /**
@@ -14,6 +15,8 @@ public class TravelTimesDao {
 
     private static TravelTimesDao travelTimesDao;
 
+    private static final int FIRST_TRAVEL_TIMES_ID = 0;
+
     private TravelTimesDao() {}
 
     public static TravelTimesDao newTravelTimesDao() {
@@ -21,6 +24,14 @@ public class TravelTimesDao {
             return new TravelTimesDao();
         }
         return travelTimesDao;
+    }
+    public int findNextTravelTimesId() {
+        Number id = Realm.getDefaultInstance().where(Sections.class).max("travelTimesId");
+        if (id == null) {
+            return FIRST_TRAVEL_TIMES_ID;
+        } else {
+            return id.intValue() + 1;
+        }
     }
 
     public Status insert(@NonNull final TravelTimes data) {
@@ -34,7 +45,7 @@ public class TravelTimesDao {
                 TravelTimes t = new TravelTimes();
                 t.setSectionId(data.getSectionId());
                 t.setTime(data.getTime());
-                t.setTravelTimesId(realm.where(TravelTimes.class).max("travelTimesId").intValue() + 1);
+                t.setTravelTimesId(data.getTravelTimesId());
                 t.setUpdateDate(data.getUpdateDate());
                 realm.copyToRealm(t);
             }

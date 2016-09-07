@@ -33,8 +33,10 @@ public class SectionRegisterUseCase {
      * 区間名の登録を行う。第２引数が0でない場合、TrvelTimesの登録処理も行う。
      *
      * */
-    public Status resisterSection(@NonNull String name, final long time) {
+    public Status resisterSection(@NonNull final String name, final long time) {
         Sections section = new Sections();
+
+        section.setSectionId(newSectionDao().findNextSectionId());
         section.setName(name);
         section.setUpdateDate((new Date()).getTime());
         if (time == 0L) {
@@ -55,7 +57,7 @@ public class SectionRegisterUseCase {
                 });
     }
 
-    public Status duplicateCheck(@NonNull String name) {
+    public Status duplicateCheck(@NonNull final String name) {
 
         if (newSectionDao().duplicate(name)) {
             return Status.DUPLICATE;
